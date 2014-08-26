@@ -1,0 +1,14 @@
+SELECT dfi.*
+--SELECT dfi.CODDOC,aba.VLRTOT
+FROM RODFIC fic
+	 LEFT OUTER JOIN RODIFI ifi ON fic.CODFIC = ifi.CODFIC AND
+							       fic.CODFIL = ifi.CODFIL
+	 LEFT OUTER JOIN RODDFI dfi ON fic.CODFIC = dfi.CODFIC AND
+							       fic.CODFIL = dfi.FILFIC
+	 LEFT OUTER JOIN RODALV alv ON fic.CODFIC = alv.CODLVI AND
+								   fic.CODFIL = alv.FILLVI
+	 LEFT OUTER JOIN RODRQA rqa ON alv.CODABA = rqa.CODRQA AND
+								   alv.FILABA = rqa.CODFIL
+	 LEFT OUTER JOIN RODABA aba ON rqa.CODRQA = aba.CODRQA AND
+								   rqa.CODFIL = aba.FILRQA
+WHERE dfi.CODFIC = 65861
